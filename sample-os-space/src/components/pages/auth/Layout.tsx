@@ -1,4 +1,4 @@
-import '../../../styles/auth/layout.css';
+import '@/styles/auth/layout.css';
 import { Outlet } from 'react-router-dom';
 import SwitchTheme from '../../share/SwitchTheme';
 

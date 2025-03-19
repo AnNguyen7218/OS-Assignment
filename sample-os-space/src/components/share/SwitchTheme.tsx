@@ -1,3 +1,4 @@
+import '@/styles/components/switchTheme.css';
 import { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeProvider';
 
@@ -13,17 +14,17 @@ const SwitchTheme = () => {
 
   return (
     <button className='theme-toggle' onClick={handleOnChangeTheme}>
-      <h1 className='theme-toggle__label'>
+      <div className='theme-toggle__label'>
         {isDarkMode ? (
-          <span>
-            <i className='fa-solid fa-sun' style={{ color: '#FFD43B' }}></i>
-          </span>
-        ) : (
           <span>
             <i className='fa-solid fa-moon' style={{ color: '#FFD43B' }}></i>
           </span>
+        ) : (
+          <span>
+            <i className='fa-solid fa-sun' style={{ color: '#000' }}></i>
+          </span>
         )}
-      </h1>
+      </div>
     </button>
   );
 };

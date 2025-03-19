@@ -1,0 +1,33 @@
+.input-wrapper-outer {
+  display: flex;
+  align-self: stretch;
+  flex-direction: column;
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0 8px;
+  align-self: stretch;
+}
+
+.input-wrapper__input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 8px;
+}
+
+.input-wrapper__icon-right {
+  cursor: pointer;
+}
+
+.input-wrapper__error {
+  color: var(--color-error);
+  font-size: 12px;
+  margin-top: 4px;
+  height: 12px;
+}

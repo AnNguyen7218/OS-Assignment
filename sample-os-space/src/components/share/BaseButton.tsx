@@ -1,3 +1,5 @@
+import '@styles/components/baseButton.css';
+
 export type BaseButtonProps = {
   text: string;
   icon?: string;
@@ -17,7 +19,7 @@ export const BaseButton = ({
 }: BaseButtonProps) => {
   return (
     <div
-      className={`${disabled || isLoading ? 'disabled' : ''} ${className ?? ''}`}
+      className={`base-btn ${disabled || isLoading ? 'disabled' : ''} ${className ?? ''}`}
       onClick={onClick}
     >
       {icon && (
