@@ -58,7 +58,6 @@ function App() {
       <Route path='*' element={<Navigate to='/login' replace />} />
     </>
   );
-
   const router = createBrowserRouter(routes);
 
   return (

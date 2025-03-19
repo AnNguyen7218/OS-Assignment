@@ -1,4 +1,5 @@
 import '@/styles/auth/login.css';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,10 +13,15 @@ import {
   LOGO,
   transformResponse
 } from '@/utils';
+import { useAppDispatch } from '@/redux/hooks';
+import { setUser } from '@/redux/user/userSlice';
+import { setTokens } from '@/redux/auth/authSlice';
 
 export default function Login() {
-  const [login, { error: serverError }] = useLoginMutation();
+  const [login, { error: serverError, isLoading }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -27,7 +33,17 @@ export default function Login() {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      await login(data);
+      const response = await login(data).unwrap();
+      const userData = {
+        ...response.user,
+        view: response.view.type
+      };
+      localStorage.setItem('refreshToken', response.tokens.refreshToken);
+      dispatch(setTokens(response.tokens));
+      dispatch(setUser({ user: userData }));
+
+      console.log('Login success:', response);
+      navigate('/admin');
     } catch (error) {
       console.error('Login failed:', error);
     }
@@ -85,14 +101,14 @@ export default function Login() {
           <div className='login-wrapper__login-form__action'>
             <PrimaryButton
               text={'Login'}
-              isLoading={isSubmitting}
-              disabled={isSubmitting || !isValid}
+              isLoading={isSubmitting || isLoading}
+              disabled={isSubmitting || !isValid || isLoading}
               onClick={handleSubmit(onSubmit)}
             />
             <BaseButton
               text={'Forgot your password?'}
               isLoading={false}
-              disabled={isSubmitting}
+              disabled={isSubmitting || isLoading}
             />
           </div>
         </div>
