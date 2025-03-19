@@ -5,9 +5,14 @@ interface AuthState {
   clientToken: string | null;
 }
 
-const initialState: AuthState = {
-  accessToken: null,
-  clientToken: null
+const initialState = (): AuthState => {
+  const accessToken = localStorage.getItem('accessToken');
+  const clientToken = localStorage.getItem('clientToken');
+
+  return {
+    accessToken,
+    clientToken
+  };
 };
 
 const authSlice = createSlice({

@@ -8,7 +8,7 @@ import {
 } from '@reduxjs/toolkit/query/react';
 import { BASE_URL } from '../utils';
 import { type RootState } from './store';
-import { loginAPI, useRefreshTokenMutation } from './auth/login';
+import { loginAPI } from './auth/loginAPI';
 import { clearTokens, setTokens } from './auth/authSlice';
 
 export const baseQuery = fetchBaseQuery({
@@ -22,7 +22,7 @@ export const baseQuery = fetchBaseQuery({
   ) => {
     const state = api.getState() as RootState;
     const accessToken = state.auth.accessToken;
-    const clientToken = state.auth.accessToken;
+    const clientToken = state.auth.clientToken;
 
     if (accessToken) {
       headers.set('Access-Token', `Bearer ${accessToken}`);

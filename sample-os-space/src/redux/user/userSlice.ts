@@ -1,8 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserType } from '../types/user';
 
-const initialState: { user: (UserType & { view: string }) | null } = {
-  user: null
+const initialState: {
+  user: (UserType & { view: string }) | null;
+  onboardingStatus: string;
+} = {
+  user: null,
+  onboardingStatus: ''
 };
 
 const userSlice = createSlice({
@@ -13,7 +17,10 @@ const userSlice = createSlice({
       state,
       action: PayloadAction<{ user: UserType & { view: string } }>
     ) => {
-      state.user = action.payload.user || null;
+      state.user = action.payload.user;
+    },
+    setOnboardStatus: (state, action: PayloadAction<{ status: string }>) => {
+      state.onboardingStatus = action.payload.status;
     },
     clearUser: (state) => {
       state.user = null;
@@ -21,5 +28,5 @@ const userSlice = createSlice({
   }
 });
 
-export const { setUser, clearUser } = userSlice.actions;
+export const { setUser, clearUser, setOnboardStatus } = userSlice.actions;
 export default userSlice.reducer;

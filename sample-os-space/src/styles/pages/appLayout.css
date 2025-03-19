@@ -1,0 +1,13 @@
+.app-layout {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+.app-layout__header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.app-layout__content {
+  padding: 12px;
+}

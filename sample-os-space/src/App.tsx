@@ -1,8 +1,8 @@
 import './App.css';
 import { Provider } from 'react-redux';
 import {
-  Route,
   Navigate,
+  Route,
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements
@@ -13,18 +13,20 @@ import { ThemeProvider } from './components/context/ThemeProvider';
 import { store } from './redux/store';
 import ProtectedRoute from './components/pages/routes/ProtectedRoute';
 import AuthLayout from './components/pages/auth/Layout';
+import AppLayout from './components/pages/Layout';
 
 const Login = lazy(() => import('./components/pages/auth/Login'));
 const Admin = lazy(() => import('./components/pages/Admin'));
 const Dashboard = lazy(() => import('./components/pages/Dashboard'));
 const Onboarding = lazy(() => import('./components/pages/Onboarding'));
 
-function App() {
-  const routes = createRoutesFromElements(
-    <>
-      <Route element={<AuthLayout />}>
-        <Route path='/login' element={<Login />} />
-      </Route>
+const routes = createRoutesFromElements(
+  <Route path='/'>
+    <Route index element={<Navigate to='/dashboard' replace />} />
+    <Route element={<AuthLayout />}>
+      <Route path='/login' element={<Login />} />
+    </Route>
+    <Route element={<AppLayout />}>
       <Route
         path='/admin'
         element={
@@ -55,17 +57,19 @@ function App() {
           </ProtectedRoute>
         }
       />
-      <Route path='*' element={<Navigate to='/login' replace />} />
-    </>
-  );
-  const router = createBrowserRouter(routes);
+    </Route>
+    <Route path='*' element={<div>Not found!</div>} />
+  </Route>
+);
+const router = createBrowserRouter(routes);
 
+function App() {
   return (
-    <ThemeProvider>
-      <Provider store={store}>
+    <Provider store={store}>
+      <ThemeProvider>
         <RouterProvider router={router} />
-      </Provider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </Provider>
   );
 }
 
