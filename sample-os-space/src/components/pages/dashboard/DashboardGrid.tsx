@@ -4,6 +4,7 @@ import '@/styles/pages/dashboard.css';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import { FontIcon } from '@/components/share';
 import { MouseEvent } from 'react';
+import { WidgetType } from '@/utils';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -14,9 +15,9 @@ export const DashboardGrid = ({
   handleEditClick
 }: {
   layouts: any;
-  widgets: any;
+  widgets: WidgetType[];
   onLayoutChange: (layout: any, allLayouts: any) => void;
-  handleEditClick: (widget: any) => void;
+  handleEditClick: (widget: WidgetType) => void;
 }) => {
   if (widgets.length === 0 || !layouts.lg) {
     return (
@@ -31,7 +32,7 @@ export const DashboardGrid = ({
     e.stopPropagation();
     handleEditClick(widget);
   };
-
+  console.log(layouts.lg, widgets);
   return (
     <div>
       <ResponsiveGridLayout
@@ -45,19 +46,21 @@ export const DashboardGrid = ({
         resizeHandles={['se']}
       >
         {layouts.lg.map((item: { i: number | null | undefined }) => {
-          const widget = widgets.find((w: { id: any }) => w.id === item.i);
+          const widget = widgets.find(
+            (w: { id: any }) => w.id.toString() === item.i
+          );
           return (
             <div key={item.i} className='dashboard__grid-item'>
               <div className='drag-handle'>⋮⋮⋮</div>
               <div onClick={(e) => selectWidget(e, widget)}>
-                <h3>{widget.title}</h3>
+                <h3>{widget?.title}</h3>
                 <div>
                   <FontIcon
-                    icon={widget.icon}
+                    icon={widget?.icon ?? ''}
                     className='dashboard__grid-item_icon'
                   />
                 </div>
-                <p>{widget.description}</p>
+                <p>{widget?.description}</p>
               </div>
             </div>
           );

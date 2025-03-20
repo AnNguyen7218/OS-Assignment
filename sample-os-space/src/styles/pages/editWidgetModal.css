@@ -41,7 +41,7 @@
 
 .modal__content textarea {
   height: 100px;
-  resize: vertical;
+  resize: none;
 }
 
 .modal__actions {
@@ -55,13 +55,19 @@
   display: flex;
   gap: 12px;
 }
-.modal__content__form {
+.modal__content__form,
+.modal__content__metric {
   border: 1px solid var(--color-primary);
   padding: 12px;
   flex: 1;
 }
 .first-col {
   flex: 2;
+}
+.last-col {
+  gap: 12px;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 800px) {

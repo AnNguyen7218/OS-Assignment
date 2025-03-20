@@ -1,6 +1,12 @@
 import '@/styles/pages/editWidgetModal.css';
 import { BaseButton, FontIcon, PrimaryButton } from '@/components/share';
 import { useState } from 'react';
+import { METRIC } from '@/utils';
+
+const METRIC_MAP = METRIC.reduce((acc: Record<string, any>, metric) => {
+  acc[metric.id] = { ...metric };
+  return acc;
+}, {});
 
 export const EditWidgetModal = ({
   widget,
@@ -42,27 +48,38 @@ export const EditWidgetModal = ({
               </div>
             </div>
           </div>
-          <form className='modal__content__form'>
-            <label>
-              Title:
-              <input
-                type='text'
-                name='title'
-                value={formData.title}
-                onChange={handleChange}
-                placeholder='Title'
-              />
-            </label>
-            <label>
-              Description:
-              <textarea
-                name='description'
-                value={formData.description}
-                onChange={handleChange}
-                placeholder='Description'
-              />
-            </label>
-          </form>
+          <div className='last-col'>
+            {widget.metricId && (
+              <div className='modal__content__metric'>
+                <p>Widget type</p>
+                <p>
+                  {METRIC_MAP[widget.metricId].title}-
+                  {METRIC_MAP[widget.metricId].type}
+                </p>
+              </div>
+            )}
+            <form className='modal__content__form'>
+              <label>
+                Title:
+                <input
+                  type='text'
+                  name='title'
+                  value={formData.title}
+                  onChange={handleChange}
+                  placeholder='Title'
+                />
+              </label>
+              <label>
+                Description:
+                <textarea
+                  name='description'
+                  value={formData.description}
+                  onChange={handleChange}
+                  placeholder='Description'
+                />
+              </label>
+            </form>
+          </div>
         </div>
         <div className='modal__actions'>
           <BaseButton onClick={onClose} text='Back' />

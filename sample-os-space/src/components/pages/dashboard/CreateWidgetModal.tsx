@@ -14,7 +14,7 @@ export const CreateWidgetModal = ({
   onClose: () => void;
   selectMetric: (metric: any) => void;
 }) => {
-  const handleSelectMetric = (e: any, metric: any) => {
+  const handleSelectMetric = (metric: any) => {
     selectMetric(metric);
   };
 
@@ -31,7 +31,7 @@ export const CreateWidgetModal = ({
               return (
                 <div
                   key={item.id}
-                  onClick={(e) => handleSelectMetric(e, item)}
+                  onClick={() => handleSelectMetric(item)}
                   className={`metric-grid__item ${isSelected ? 'selected' : ''}`}
                 >
                   <FontIcon icon={item.icon} />
@@ -43,7 +43,7 @@ export const CreateWidgetModal = ({
         </div>
         <div className='modal__actions'>
           <BaseButton onClick={onClose} text='Back' />
-          <PrimaryButton onClick={(e: any) => {}} text='Next' />
+          <PrimaryButton onClick={onSave} text='Next' />
         </div>
       </div>
     </div>
