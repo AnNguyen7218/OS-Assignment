@@ -1,5 +1,5 @@
 import '@/styles/pages/editWidgetModal.css';
-import { BaseButton, PrimaryButton } from '@/components/share';
+import { BaseButton, FontIcon, PrimaryButton } from '@/components/share';
 import { useState } from 'react';
 
 export const EditWidgetModal = ({
@@ -22,36 +22,52 @@ export const EditWidgetModal = ({
     e.preventDefault();
     onSave(formData);
   };
-
   return (
     <div className='modal__overlay'>
       <div className='modal__content'>
-        <h3>Edit Widget</h3>
-        <form>
-          <label>
-            Title:
-            <input
-              type='text'
-              name='title'
-              value={formData.title}
-              onChange={handleChange}
-              placeholder='Title'
-            />
-          </label>
-          <label>
-            Description:
-            <textarea
-              name='description'
-              value={formData.description}
-              onChange={handleChange}
-              placeholder='Description'
-            />
-          </label>
-          <div className='modal__actions'>
-            <BaseButton onClick={onClose} text='Back' />
-            <PrimaryButton onClick={(e: any) => handleSubmit(e)} text='Add' />
+        <h3>Configure Widget</h3>
+        <p>Add a title and select data to display on the overview page.</p>
+        <div className='modal__content__layout'>
+          <div className='first-col'>
+            <div className='dashboard__grid-item'>
+              <div>
+                <h3>{formData.title ?? widget.title}</h3>
+                <div>
+                  <FontIcon
+                    icon={widget.icon}
+                    className='dashboard__grid-item_icon'
+                  />
+                </div>
+                <p>{formData.description ?? widget.description}</p>
+              </div>
+            </div>
           </div>
-        </form>
+          <form className='modal__content__form'>
+            <label>
+              Title:
+              <input
+                type='text'
+                name='title'
+                value={formData.title}
+                onChange={handleChange}
+                placeholder='Title'
+              />
+            </label>
+            <label>
+              Description:
+              <textarea
+                name='description'
+                value={formData.description}
+                onChange={handleChange}
+                placeholder='Description'
+              />
+            </label>
+          </form>
+        </div>
+        <div className='modal__actions'>
+          <BaseButton onClick={onClose} text='Back' />
+          <PrimaryButton onClick={(e: any) => handleSubmit(e)} text='Add' />
+        </div>
       </div>
     </div>
   );
