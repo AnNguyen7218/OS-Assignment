@@ -3,10 +3,10 @@ import '@styles/components/baseButton.css';
 export type BaseButtonProps = {
   text: string;
   icon?: string;
-  isLoading: boolean;
-  disabled: boolean;
+  isLoading?: boolean;
+  disabled?: boolean;
   className?: string;
-  onClick?: () => void;
+  onClick?: (args?: any) => void;
 };
 
 export const BaseButton = ({

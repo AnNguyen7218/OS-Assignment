@@ -10,9 +10,8 @@ const ProtectedRoute = ({ children }: PropsWithChildren) => {
     isLoading,
     onboardingStatus
   } = useContext(AuthContext);
-
   if (isLoading) {
-    return <div>Loading route...</div>;
+    return <div className='main-text'>Loading route...</div>;
   }
 
   if (!storedUser) {
@@ -20,18 +19,21 @@ const ProtectedRoute = ({ children }: PropsWithChildren) => {
   }
 
   if (storedUser?.view === 'ADMIN') {
-    return pathname === '/admin' ? children : <Navigate to='/admin' replace />;
+    if (pathname === '/' || pathname === '/login') {
+      return <Navigate to='/admin' replace />;
+    }
+    return children;
   }
 
   const returnOrNavigate = (path: string) =>
     pathname === path ? children : <Navigate to={path} replace />;
 
   if (storedUser?.view === 'CLIENT') {
-    if (onboardingStatus && onboardingStatus !== 'DONE') {
-      return returnOrNavigate('/onboarding');
+    if (onboardingStatus && onboardingStatus === 'DONE') {
+      return returnOrNavigate('/dashboard');
     }
 
-    return returnOrNavigate('/dashboard');
+    return returnOrNavigate('/onboarding');
   }
 
   return children;
