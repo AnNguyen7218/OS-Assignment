@@ -10,7 +10,7 @@ const ProtectedRoute = ({ children }: PropsWithChildren) => {
     isLoading,
     onboardingStatus
   } = useContext(AuthContext);
-
+  console.log(storedUser, onboardingStatus);
   if (isLoading) {
     return <div className='main-text'>Loading route...</div>;
   }
@@ -27,11 +27,11 @@ const ProtectedRoute = ({ children }: PropsWithChildren) => {
     pathname === path ? children : <Navigate to={path} replace />;
 
   if (storedUser?.view === 'CLIENT') {
-    if (onboardingStatus && onboardingStatus !== 'DONE') {
-      return returnOrNavigate('/onboarding');
+    if (onboardingStatus && onboardingStatus === 'DONE') {
+      return returnOrNavigate('/dashboard');
     }
 
-    return returnOrNavigate('/dashboard');
+    return returnOrNavigate('/onboarding');
   }
 
   return children;

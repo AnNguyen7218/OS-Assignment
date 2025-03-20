@@ -18,7 +18,7 @@ export const DashboardGrid = ({
   onLayoutChange: (layout: any, allLayouts: any) => void;
   handleEditClick: (widget: any) => void;
 }) => {
-  if (widgets.length === 0) {
+  if (widgets.length === 0 || !layouts.lg) {
     return (
       <div className='empty-content'>
         <h3>Nothing here. Add more widget</h3>

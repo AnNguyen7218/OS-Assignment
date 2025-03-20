@@ -10,7 +10,9 @@ const isAdmin = true;
 export default function Dashboard() {
   // const { isAdmin } = useContext(AuthContext);
   const localLayout = localStorage.getItem('dashboardLayouts') ?? '{}';
-  const storedLayouts = JSON.parse(localLayout) ?? LAYOUT_CONFIG;
+  const storedLayouts = !!JSON.parse(localLayout)
+    ? LAYOUT_CONFIG
+    : JSON.parse(localLayout);
   const [layouts, setLayouts] = useState(storedLayouts);
   const [widgets, setWidgets] = useState(WIDGETS);
   const [editingWidget, setEditingWidget] = useState(null);
