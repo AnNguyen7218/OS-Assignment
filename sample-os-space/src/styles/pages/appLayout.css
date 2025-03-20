@@ -11,3 +11,7 @@
 .app-layout__content {
   padding: 12px;
 }
+.app-layout__header__logout {
+  cursor: pointer;
+  color: var(--color-text);
+}

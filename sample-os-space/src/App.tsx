@@ -14,6 +14,7 @@ import { store } from './redux/store';
 import ProtectedRoute from './components/pages/routes/ProtectedRoute';
 import AuthLayout from './components/pages/auth/Layout';
 import AppLayout from './components/pages/Layout';
+import { AuthProvider } from './components/context/AuthProvider';
 
 const Login = lazy(() => import('./components/pages/auth/Login'));
 const Admin = lazy(() => import('./components/pages/Admin'));
@@ -58,7 +59,7 @@ const routes = createRoutesFromElements(
         }
       />
     </Route>
-    <Route path='*' element={<div>Not found!</div>} />
+    <Route path='*' element={<div className='main-text'>Not found!</div>} />
   </Route>
 );
 const router = createBrowserRouter(routes);
@@ -66,9 +67,11 @@ const router = createBrowserRouter(routes);
 function App() {
   return (
     <Provider store={store}>
-      <ThemeProvider>
-        <RouterProvider router={router} />
-      </ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider>
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </AuthProvider>
     </Provider>
   );
 }

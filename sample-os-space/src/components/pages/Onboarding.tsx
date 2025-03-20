@@ -1,3 +1,3 @@
 export default function Onboarding() {
-  return <div> Onboarding page </div>;
+  return <div className='main-text'> Onboarding page </div>;
 }

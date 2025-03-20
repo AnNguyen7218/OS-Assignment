@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserType } from '../types/user';
 
 const initialState: {
-  user: (UserType & { view: string }) | null;
+  user: (UserType & { view: string; storeId: number }) | null;
   onboardingStatus: string;
 } = {
   user: null,
@@ -15,7 +15,9 @@ const userSlice = createSlice({
   reducers: {
     setUser: (
       state,
-      action: PayloadAction<{ user: UserType & { view: string } }>
+      action: PayloadAction<{
+        user: UserType & { view: string; storeId: number };
+      }>
     ) => {
       state.user = action.payload.user;
     },

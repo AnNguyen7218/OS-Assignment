@@ -1,3 +1,3 @@
 export default function Admin() {
-  return <div> admin page </div>;
+  return <div className='main-text'> Admin page </div>;
 }
