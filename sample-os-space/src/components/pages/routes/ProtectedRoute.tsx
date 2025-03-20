@@ -12,7 +12,7 @@ const ProtectedRoute = ({ children }: PropsWithChildren) => {
   } = useContext(AuthContext);
 
   if (isLoading) {
-    return <div>Loading route...</div>;
+    return <div className='main-text'>Loading route...</div>;
   }
 
   if (!storedUser) {

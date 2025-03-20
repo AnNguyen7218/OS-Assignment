@@ -12,6 +12,7 @@
   --color-background: #f2efe5;
   --color-text: #1f2937;
   --color-text-on-primary: #ffffff;
+  --color-text-on-secondary: #1f2937;
   --color-button: #288364;
   --color-button-hover: #1f6650;
   --color-border: #e5e7eb;
@@ -26,6 +27,7 @@
   --color-background: #111827;
   --color-text: #f9fafb;
   --color-text-on-primary: #ffffff;
+  --color-text-on-secondary: #1f2937;
   --color-button: #4ade80;
   --color-button-hover: #22c55e;
   --color-border: #c8c8c8;

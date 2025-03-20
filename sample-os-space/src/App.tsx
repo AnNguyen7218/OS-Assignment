@@ -15,6 +15,7 @@ import ProtectedRoute from './components/pages/routes/ProtectedRoute';
 import AuthLayout from './components/pages/auth/Layout';
 import AppLayout from './components/pages/Layout';
 import { AuthProvider } from './components/context/AuthProvider';
+import { LoadingPage } from './components/share';
 
 const Login = lazy(() => import('./components/pages/auth/Login'));
 const Admin = lazy(() => import('./components/pages/Admin'));
@@ -32,7 +33,7 @@ const routes = createRoutesFromElements(
         path='/admin'
         element={
           <ProtectedRoute>
-            <Suspense fallback={<div>Loading page...</div>}>
+            <Suspense fallback={<LoadingPage />}>
               <Admin />
             </Suspense>
           </ProtectedRoute>
@@ -42,7 +43,7 @@ const routes = createRoutesFromElements(
         path='/dashboard'
         element={
           <ProtectedRoute>
-            <Suspense fallback={<div>Loading page...</div>}>
+            <Suspense fallback={<LoadingPage />}>
               <Dashboard />
             </Suspense>
           </ProtectedRoute>
@@ -52,7 +53,7 @@ const routes = createRoutesFromElements(
         path='/onboarding'
         element={
           <ProtectedRoute>
-            <Suspense fallback={<div>Loading page...</div>}>
+            <Suspense fallback={<LoadingPage />}>
               <Onboarding />
             </Suspense>
           </ProtectedRoute>

@@ -4,16 +4,29 @@ import { DashboardGrid } from './dashboard/DashboardGrid';
 import { LAYOUT_CONFIG, WIDGETS } from '@/utils';
 import { BaseButton, PrimaryButton } from '../share';
 import { AuthContext } from '../context/AuthProvider';
+import { EditWidgetModal } from './dashboard/EditWidgetModal';
 
 const isAdmin = true;
 export default function Dashboard() {
   // const { isAdmin } = useContext(AuthContext);
-  const [layouts, setLayouts] = useState(LAYOUT_CONFIG);
+  const localLayout = localStorage.getItem('dashboardLayouts') ?? '{}';
+  const storedLayouts = JSON.parse(localLayout) ?? LAYOUT_CONFIG;
+  const [layouts, setLayouts] = useState(storedLayouts);
   const [widgets, setWidgets] = useState(WIDGETS);
   const [editingWidget, setEditingWidget] = useState(null);
 
   const handleEditClick = (widget: any) => {
     if (isAdmin) setEditingWidget(widget);
+  };
+  const handleClose = () => {
+    setEditingWidget(null);
+  };
+  const handleSave = (updatedWidget: any) => {
+    const updatedWidgets = widgets.map((w) =>
+      w.id === updatedWidget.id ? updatedWidget : w
+    );
+    setWidgets(updatedWidgets);
+    setEditingWidget(null);
   };
 
   const onLayoutChange = (layout: any, allLayouts: any) => {
@@ -47,6 +60,13 @@ export default function Dashboard() {
         onLayoutChange={onLayoutChange}
         handleEditClick={handleEditClick}
       />
+      {editingWidget && isAdmin && (
+        <EditWidgetModal
+          widget={editingWidget}
+          onSave={handleSave}
+          onClose={handleClose}
+        />
+      )}
     </div>
   );
 }
