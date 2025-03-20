@@ -12,3 +12,10 @@ export const loginSchema = z.object({
     .max(32, 'Password must not exceed 32 characters')
 });
 export type LoginFormData = z.infer<typeof loginSchema>;
+
+export const widgetSchema = z.object({
+  id: z.any(),
+  title: z.string().min(1, 'The title is required'),
+  description: z.string().min(1, 'The description must not be empty')
+});
+export type WidgetFormData = z.infer<typeof widgetSchema>;
