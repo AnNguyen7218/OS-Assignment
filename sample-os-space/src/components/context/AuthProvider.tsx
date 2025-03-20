@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     { skip: !targetUser || storeId === -1 }
   );
   const status = storeInfo?.store.onboarding_procedure.onboarding_status;
-  console.log(storeInfo, targetUser, storeId);
+
   return (
     <AuthContext.Provider
       value={{

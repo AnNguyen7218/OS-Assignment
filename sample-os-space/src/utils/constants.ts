@@ -12,23 +12,43 @@ export const WIDGETS = [
     id: '0',
     icon: 'fa-id-card',
     title: 'Identities Provided',
-    description: 'New identities provided during the selected time period.'
+    description: 'New identities provided during the selected time period.',
+    metricId: 'default'
   },
   {
     id: '1',
     title: 'Opened Message',
     icon: 'fa-message',
     description:
-      'Number of provided identities who opened emails during the selected time period.'
+      'Number of provided identities who opened emails during the selected time period.',
+    metricId: 'default'
   },
   {
     id: '2',
     title: 'Clicked',
     icon: 'fa-computer-mouse',
     description:
-      'Number of provided identities who clicked on emails for the time period.'
+      'Number of provided identities who clicked on emails for the time period.',
+    metricId: 'default'
   }
 ];
+
+export const METRIC = [
+  {
+    icon: 'fa-id-card',
+    title: 'Identities Provided',
+    type: 'TEXT',
+    id: 'default'
+  },
+  { icon: 'fa-message', title: 'Iterable Metric', type: 'TEXT', id: 'metric1' },
+  {
+    icon: 'fa-computer-mouse',
+    title: 'Yotpo Metric',
+    type: 'TEXT',
+    id: 'metric2'
+  }
+];
+
 export const LAYOUT_CONFIG = {
   lg: [
     { x: 0, y: 0, w: 2, h: 2, i: '0', minW: 2, minH: 2, maxW: 6 },

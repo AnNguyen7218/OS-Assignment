@@ -10,7 +10,6 @@ const ProtectedRoute = ({ children }: PropsWithChildren) => {
     isLoading,
     onboardingStatus
   } = useContext(AuthContext);
-  console.log(storedUser, onboardingStatus);
   if (isLoading) {
     return <div className='main-text'>Loading route...</div>;
   }
