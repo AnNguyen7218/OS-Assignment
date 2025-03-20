@@ -1,13 +1,19 @@
-import { useAppSelector } from '@/redux/hooks';
-import { selectUser } from '@/redux/user/userSelector';
-import { PropsWithChildren } from 'react';
+import { AuthContext } from '@/components/context/AuthProvider';
+import { PropsWithChildren, useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }: PropsWithChildren) => {
   const { pathname } = useLocation();
-  const { user: storedUser, onboardingStatus } = useAppSelector((state) =>
-    selectUser(state)
-  );
+
+  const {
+    user: storedUser,
+    isLoading,
+    onboardingStatus
+  } = useContext(AuthContext);
+
+  if (isLoading) {
+    return <div>Loading route...</div>;
+  }
 
   if (!storedUser) {
     return <Navigate to='/login' replace />;

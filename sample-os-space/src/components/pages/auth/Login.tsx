@@ -1,6 +1,6 @@
 import '@/styles/auth/login.css';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useLoginMutation } from '@/redux/auth/loginAPI';
@@ -34,13 +34,23 @@ export default function Login() {
   });
 
   const onSubmit = async (data: LoginFormData) => {
+    localStorage.clear();
+
     try {
       const response = await login(data).unwrap();
+      const storeId = response.accesses[0].store_id;
+
       const userData = {
         ...response.user,
-        view: response.view.type
+        view: response.view.type,
+        storeId
       };
       localStorage.setItem('refreshToken', response.tokens.refreshToken);
+
+      // NOTE - temporary to store accessToken and clientToken in localStorage
+      // should add refresh token flow and remove theses
+      localStorage.setItem('accessToken', response.tokens.accessToken);
+      localStorage.setItem('clientToken', response.tokens?.clientToken ?? '');
 
       dispatch(setTokens(response.tokens));
       if (userData) {
@@ -50,7 +60,6 @@ export default function Login() {
       if (userData.view === 'ADMIN') {
         navigate('/admin');
       } else {
-        const storeId = response.accesses[0].store_id;
         const storeInfo = await trigger({ id: storeId }).unwrap();
         const status = storeInfo.store.onboarding_procedure.onboarding_status;
         dispatch(setOnboardStatus({ status }));
