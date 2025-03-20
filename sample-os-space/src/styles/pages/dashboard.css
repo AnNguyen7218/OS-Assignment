@@ -1,0 +1,30 @@
+.dashboard__grid-item {
+  border: 1px solid var(--color-primary);
+  padding: 12px;
+}
+.dashboard .react-grid-item.react-grid-placeholder {
+  background: var(--color-primary);
+  opacity: 0.2;
+}
+.react-grid-item .react-resizable-handle::after {
+  border-color: var(--color-text) !important;
+}
+.dashboard__grid-item_icon::before {
+  font-size: 32px;
+}
+
+.dashboard__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.empty-content {
+  margin: 0 auto;
+  padding: 12px;
+  width: 100%;
+  text-align: center;
+}
+.drag-handle {
+  cursor: move;
+  font-size: 16px;
+}
