@@ -10,16 +10,25 @@ import { calculateNewWidgetPosition } from '@/utils/gridLayout';
 
 export default function Dashboard() {
   const { isAdmin } = useContext(AuthContext);
-  const localLayout = localStorage.getItem('dashboardLayouts') ?? '{}';
-  const storedLayouts = JSON.parse(localLayout);
-  const [layouts, setLayouts] = useState(storedLayouts);
-  const [widgets, setWidgets] = useState<WidgetType[]>([]);
+
+  const [layouts, setLayouts] = useState(() => {
+    const savedLayouts = localStorage.getItem('dashboardLayouts');
+    return savedLayouts ? JSON.parse(savedLayouts) : {};
+  });
+
+  const [widgets, setWidgets] = useState<WidgetType[]>(() => {
+    const savedWidgets = localStorage.getItem('widgets');
+    return savedWidgets ? JSON.parse(savedWidgets) : [];
+  });
+
   const [editingWidget, setEditingWidget] = useState<WidgetType | null>(null);
   const [metric, setMetric] = useState<MetricType>(METRIC[0]);
   const [showModalAdd, setShowModalAdd] = useState(false);
 
   const handleEditClick = (widget: any) => {
-    if (isAdmin) setEditingWidget(widget);
+    if (isAdmin) {
+      setEditingWidget(widget);
+    }
   };
 
   const handleClose = () => {
@@ -58,7 +67,7 @@ export default function Dashboard() {
     setMetric(METRIC[0]);
   };
 
-  const onLayoutChange = (layout: any, allLayouts: any) => {
+  const onLayoutChange = (_: any, allLayouts: any) => {
     setLayouts(allLayouts);
   };
 
@@ -75,13 +84,9 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    const savedLayouts = localStorage.getItem('dashboardLayouts');
-    if (savedLayouts) setLayouts(JSON.parse(savedLayouts));
-  }, []);
-
-  useEffect(() => {
     localStorage.setItem('dashboardLayouts', JSON.stringify(layouts));
-  }, [layouts]);
+    localStorage.setItem('widgets', JSON.stringify(widgets));
+  }, [layouts, widgets]);
 
   return (
     <div className='main-text dashboard'>
@@ -100,7 +105,7 @@ export default function Dashboard() {
         onLayoutChange={onLayoutChange}
         handleEditClick={handleEditClick}
       />
-      {editingWidget && isAdmin && (
+      {editingWidget && (
         <EditWidgetModal
           widget={editingWidget}
           onSave={handleSave}

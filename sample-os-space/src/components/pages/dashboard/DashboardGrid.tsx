@@ -32,7 +32,7 @@ export const DashboardGrid = ({
     e.stopPropagation();
     handleEditClick(widget);
   };
-  console.log(layouts.lg, widgets);
+
   return (
     <div>
       <ResponsiveGridLayout
