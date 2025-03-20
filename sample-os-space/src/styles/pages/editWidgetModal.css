@@ -74,4 +74,8 @@
   .modal__content__layout {
     flex-direction: column;
   }
+  .modal__content {
+    max-height: 90%;
+    overflow: scroll;
+  }
 }

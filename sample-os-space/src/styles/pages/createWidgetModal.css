@@ -63,3 +63,9 @@
 .metric-grid__item.selected {
   border: 2px solid var(--color-primary);
 }
+
+@media (max-width: 500px) {
+  .metric-grid__item {
+    min-width: 100%;
+  }
+}

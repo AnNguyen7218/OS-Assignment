@@ -30,7 +30,7 @@ export const EditWidgetModal = ({
   };
   return (
     <div className='modal__overlay'>
-      <div className='modal__content'>
+      <div className='modal__content no-scrollbar'>
         <h3>Configure Widget</h3>
         <p>Add a title and select data to display on the overview page.</p>
         <div className='modal__content__layout'>
