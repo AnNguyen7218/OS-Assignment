@@ -15,3 +15,8 @@
   cursor: pointer;
   color: var(--color-text);
 }
+.app-layout__header__link {
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--color-text);
+}
