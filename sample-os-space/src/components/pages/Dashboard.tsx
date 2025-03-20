@@ -1,22 +1,15 @@
 import '@/styles/pages/dashboard.css';
 import { useContext, useEffect, useState } from 'react';
 import { DashboardGrid } from './dashboard/DashboardGrid';
-import {
-  LAYOUT_CONFIG,
-  METRIC,
-  MetricType,
-  WIDGETS,
-  WidgetType
-} from '@/utils';
-import { BaseButton, PrimaryButton } from '../share';
+import { METRIC, MetricType, WidgetType } from '@/utils';
+import { PrimaryButton } from '../share';
 import { AuthContext } from '../context/AuthProvider';
 import { EditWidgetModal } from './dashboard/EditWidgetModal';
 import { CreateWidgetModal } from './dashboard/CreateWidgetModal';
 import { calculateNewWidgetPosition } from '@/utils/gridLayout';
 
-const isAdmin = true;
 export default function Dashboard() {
-  // const { isAdmin } = useContext(AuthContext);
+  const { isAdmin } = useContext(AuthContext);
   const localLayout = localStorage.getItem('dashboardLayouts') ?? '{}';
   const storedLayouts = JSON.parse(localLayout);
   const [layouts, setLayouts] = useState(storedLayouts);

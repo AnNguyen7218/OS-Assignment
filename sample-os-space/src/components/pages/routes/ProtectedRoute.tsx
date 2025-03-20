@@ -19,7 +19,10 @@ const ProtectedRoute = ({ children }: PropsWithChildren) => {
   }
 
   if (storedUser?.view === 'ADMIN') {
-    return pathname === '/admin' ? children : <Navigate to='/admin' replace />;
+    if (pathname === '/' || pathname === '/login') {
+      return <Navigate to='/admin' replace />;
+    }
+    return children;
   }
 
   const returnOrNavigate = (path: string) =>
